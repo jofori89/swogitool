@@ -1923,3 +1923,57 @@ body.SGO-cardbuilder-card hr.clear {
     bottom: -6px;
     right: -3px;
 }
+
+.preview-image {
+    transition: all 0.5s !important;
+    -webkit-transition: all 0.5s !important;
+    -ms-transition: all 0.5s !important;
+    -o-transition: all 0.5s !important;
+    position: relative !important;
+}
+
+.preview-image:hover {
+    z-index: 100 !important;
+    transform: scale(1.6) translate(-50px, 90px);
+    -webkit-transform: scale(1.6) translate(-50px, 90px);
+    -ms-transform: scale(1.6) translate(-50px, 90px);
+    -o-transform: scale(1.6) translate(-50px, 90px);
+    box-shadow: 3px 3px 3px #5f5f5f;
+}
+
+#seo-description {
+    display: none;
+}
+
+#options #wrapper-options-permalink {
+    font-size: small;
+    line-height: 1;
+    position: relative;
+    top: 5px;
+    right: 0;
+}
+
+#collection .collection-card .card-faction {
+    position: absolute;
+    top: 1px !important;
+    left: 3px !important;
+    width: 20px;
+    height: 27px;
+}
+
+#collection .collection-card .card-size {
+    position: absolute;
+    top: 5px !important;
+    right: 6px;
+    display: block;
+    background-color: rgba(173, 75, 45, 0.40);
+    color: #FFF;
+    border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -ms-border-radius: 0 !important;
+    -o-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    padding: 0 4px 2px 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: 500 !important;
+}
