@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Card</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="description" content="Little utility to help you make your dream deck." />
+    <script src="assets/core/jquery/jquery-3.1.1.min.js"></script>
+    <link href="assets/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        // only used for standalone version
+        var Loader = { datastream: null, cards: [] };
+    </script>
+    <script src="SwordGirlData.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var hostImage = "http://www.sword-girls.com/Img/Card/";
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.href);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        $(document).ready(function () {
+            var card = Loader.cards[0];
+            for (var i = 0; i < Loader.cards.length; ++i) {
+                if (Loader.cards[i].id == getParameterByName("id")) {
+                    card = Loader.cards[i];
+                }
+            }
+            $("title").text(card.name);
+            $("#style-wrapper-2 > h1 a").text(card.name);
+
+            var cardImg;
+            if (card.id == '200440') {
+                cardImg = '200440L.jpg';
+            } else if (card.id == '200465') {
+                cardImg = '200465L.jpg';
+            } else if (card.id == '300303') {
+                cardImg = '300303L.jpg';
+            } else if (card.id == '110280') {
+                cardImg = '110280L.jpg';
+            } else if (card.id == '200467') {
+                cardImg = '200467L.jpg';
+            } else if (card.id == '300581') {
+                cardImg = '300581L.jpg';
+            }
+                /*110280, 200467, 300581*/
+            else if (card.id == '100258') {
+                cardImg = '100258L.jpg';
+            } else if (card.id == '100259') {
+                cardImg = '100259L.jpg';
+            } else if (card.id == '100260') {
+                cardImg = '100260L.jpg';
+            } else if (card.id == '100261') {
+                cardImg = '100261L.jpg';
+            } else {
+                cardImg = hostImage + card.id + 'L.jpg';
+            }
+
+            $('#characterimage').attr({ "src": cardImg, "alt": card.name });
+
+            var koreanLink = "http://www.sword-girls.co.kr/World/Card/View.aspx?CardNo=",
+            koreanArtLink = "http://www.sword-girls.co.kr/World/Card/List.aspx?cardArtist=";
+            var content = "";
+
+            content += '<div class="row">' +
+                    '<div class="col-md-3 title">Korean</div>' +
+                    '<div class="col-md-7"><a style="font-weight:bold; color:blue;" href="' + koreanLink + card.id + '" target="_blank">' + card.krname +
+                    '</a></div>' +
+                '</div>';
+
+            if (card.artist != '') {
+                content += '<div class="row"><div class="col-md-3 title">Artist</div><div class="col-md-7"><a href="' + koreanArtLink + escape(card.artist) + '" target="_blank" style="text-decoration: none;">' + card.artist + '</a></div></div>';
+            }
+
+            if (card.id > 300000)
+                content += '<div class="row"><div class="col-md-3 title">Stats</div><div class="col-md-7">' + card.stats.atk + ' / ' + card.stats.def + ' / ' + card.stats.stm + '</div></div>';
+            // End If Follwers
+            if (card.id > 200000 && card.size > 0)
+                content += '<div class="row"><div class="col-md-3 title">Size</div><div class="col-md-7">' + card.size + '</div></div>';
+            // check if spell or material
+            if (card.id > 200000)
+                content += '<div class="row"><div class="col-md-3 title">Limit</div><div class="col-md-7">' + card.limit + '</div></div>';
+            content += '<div class="row"><div class="col-md-3 title">Points</div><div class="col-md-7">' + card.CP + '</div></div>';
+            content += '<div class="row"><div class="col-md-3 title">Rarity</div><div class="col-md-7">' + card.rarity + '</div></div>';
+            // end if spell
+            if (card.id > 100000 && card.id < 129999)
+                content += '<div class="row"><div class="col-md-3 title">Life</div><div class="col-md-7">' + card.life + '</div></div>';
+            // end if character
+            content += '<div class="row"><div class="col-md-3 title">ID</div><div class="col-md-7">' + card.id + '</div></div>';
+            content += '<div class="row"><div class="col-md-3 title">Episode</div><div class="col-md-7">' + card.episode + '</div></div>';
+            content += '<div class="row"><div class="col-md-3 title">Faction</div><div class="col-md-7">' + card.faction + '</div></div>';
+            $("#cardinfo").html(content);
+
+            var ablty = card.ability.replace(/\[/g, "<br ><b>[").replace(/\]/g, "]</b><br >");
+            $("#cardability").html(ablty);
+            $("#cardtext").html(card.text);
+
+        });
+    </script>
+</head>
+<body class="SGO-cardbuilder-card">
+    <div id="page" class="cardviewer container-fluid">
+        <div id="style-wrapper" class="center-block">
+            <span id="style-cardviewer-ctl"></span>
+            <span id="style-cardviewer-ctr"></span>
+            <span id="style-cardviewer-cbl"></span>
+            <span id="style-cardviewer-cbr"></span>
+            <div id="style-wrapper-1" class="row">
+                <div id="style-wrapper-2">
+                    <h1>
+                        <a href="http://swogitools-v2.net63.net/">Card name</a>
+                    </h1>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="characterimage" class="img-responsive" src="" alt="" />
+                        </div>
+                        <div class="col-md-6" id="cardinfowindow">
+                            <div id="cardinfo">
+                            </div>
+                            <div id="cardability">
+                                ablty
+                            </div>
+                            <div id="cardtext" style="font-style: italic;">
+                                card text
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="clear">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
